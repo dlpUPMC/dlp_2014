@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u552-2.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Invocation en consequence")
+(define (foo x)
+  (* 2 x) )
+(if #t 
+    (foo 3)
+    552 )
+
+;;; end of u552-2.scm
+
+ -->
+<programme2
+><!-- test:name description='Invocation en consequence' 
+--><definitionFonction nom='foo'
+><variables
+><variable nom='x'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='2'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></corps
+></definitionFonction
+><alternative
+><condition
+><booleen valeur='true'
+/></condition
+><consequence
+><invocation
+><fonction
+><variable nom='foo'
+/></fonction
+><arguments
+><entier valeur='3'
+/></arguments
+></invocation
+></consequence
+><alternant
+><entier valeur='552'
+/></alternant
+></alternative
+></programme2
+>

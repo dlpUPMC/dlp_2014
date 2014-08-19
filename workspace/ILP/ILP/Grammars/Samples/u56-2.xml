@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u56-2.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "deux fonctions mutuellement recursives")
+(define (odd n)
+  (if (= n 0) 
+      #f
+      (if (= n 1)
+          #t 
+          (even (- n 1)) ) ) )
+(define (even n)
+  (if (= n 0)
+      #t 
+      (if (= n 1)
+          #f
+          (odd (- n 1)) ) ) )
+(not (odd 56))
+
+;;; end of u56-2.scm
+
+ -->
+<programme2
+><!-- test:name description='deux fonctions mutuellement recursives' 
+--><definitionFonction nom='odd'
+><variables
+><variable nom='n'
+/></variables
+><corps
+><alternative
+><condition
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='n'
+/></operandeGauche
+><operandeDroit
+><entier valeur='0'
+/></operandeDroit
+></operationBinaire
+></condition
+><consequence
+><booleen valeur='false'
+/></consequence
+><alternant
+><alternative
+><condition
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='n'
+/></operandeGauche
+><operandeDroit
+><entier valeur='1'
+/></operandeDroit
+></operationBinaire
+></condition
+><consequence
+><booleen valeur='true'
+/></consequence
+><alternant
+><invocation
+><fonction
+><variable nom='even'
+/></fonction
+><arguments
+><operationBinaire operateur='-'
+><operandeGauche
+><variable nom='n'
+/></operandeGauche
+><operandeDroit
+><entier valeur='1'
+/></operandeDroit
+></operationBinaire
+></arguments
+></invocation
+></alternant
+></alternative
+></alternant
+></alternative
+></corps
+></definitionFonction
+><definitionFonction nom='even'
+><variables
+><variable nom='n'
+/></variables
+><corps
+><alternative
+><condition
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='n'
+/></operandeGauche
+><operandeDroit
+><entier valeur='0'
+/></operandeDroit
+></operationBinaire
+></condition
+><consequence
+><booleen valeur='true'
+/></consequence
+><alternant
+><alternative
+><condition
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='n'
+/></operandeGauche
+><operandeDroit
+><entier valeur='1'
+/></operandeDroit
+></operationBinaire
+></condition
+><consequence
+><booleen valeur='false'
+/></consequence
+><alternant
+><invocation
+><fonction
+><variable nom='odd'
+/></fonction
+><arguments
+><operationBinaire operateur='-'
+><operandeGauche
+><variable nom='n'
+/></operandeGauche
+><operandeDroit
+><entier valeur='1'
+/></operandeDroit
+></operationBinaire
+></arguments
+></invocation
+></alternant
+></alternative
+></alternant
+></alternative
+></corps
+></definitionFonction
+><operationUnaire operateur='!'
+><operande
+><invocation
+><fonction
+><variable nom='odd'
+/></fonction
+><arguments
+><entier valeur='56'
+/></arguments
+></invocation
+></operande
+></operationUnaire
+></programme2
+>

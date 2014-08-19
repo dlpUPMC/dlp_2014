@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u26-2.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "bloc local avec 2 variables")
+(let ((x 1)
+      (y 2) ) 
+  (+ x y) )
+
+;;; end of u26-2.scm
+
+ -->
+<programme2
+><!-- test:name description='bloc local avec 2 variables' 
+--><blocLocal
+><liaisons
+><liaison
+><variable nom='x'
+/><initialisation
+><entier valeur='1'
+/></initialisation
+></liaison
+><liaison
+><variable nom='y'
+/><initialisation
+><entier valeur='2'
+/></initialisation
+></liaison
+></liaisons
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><variable nom='y'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocLocal
+></programme2
+>

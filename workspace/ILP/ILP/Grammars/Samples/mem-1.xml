@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id$
+
+(let ((m0 (memoryGet)))
+  (+ 1 2)
+  (> (memoryGet) m0) )
+  
+;;; end of mem01.scm
+
+ -->
+<programme1
+><blocUnaire
+><variable nom='m0'
+/><valeur
+><invocationPrimitive fonction='memoryGet'
+></invocationPrimitive
+></valeur
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><entier valeur='1'
+/></operandeGauche
+><operandeDroit
+><entier valeur='2'
+/></operandeDroit
+></operationBinaire
+><operationBinaire operateur='&gt;'
+><operandeGauche
+><invocationPrimitive fonction='memoryGet'
+></invocationPrimitive
+></operandeGauche
+><operandeDroit
+><variable nom='m0'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme1
+>

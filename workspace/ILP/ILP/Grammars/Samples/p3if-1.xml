@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+  Le programme est:
+       if ( true ) {
+          1;
+       } else {
+          "foo";
+       }
+-->
+<programme1>
+  <alternative>
+    <condition>
+      <booleen valeur='true'/>
+    </condition>
+    <consequence>
+      <entier valeur='1'/>
+    </consequence>
+    <alternant>
+      <chaine>foo</chaine>
+    </alternant>
+  </alternative>
+</programme1>

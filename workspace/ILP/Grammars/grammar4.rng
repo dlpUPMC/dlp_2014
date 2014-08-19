@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!--
+    -*- coding: utf-8 -*-
+    ******************************************************************
+    ILP - Implantation d'un langage de programmation.
+    Copyright (C) 2004 <Christian.Queinnec@lip6.fr>
+    $Id: grammar4.rnc 477 2006-09-29 13:23:48Z queinnec $
+    GPL version>=2
+    ******************************************************************
+  -->
+  <!--
+    Quatrième version du langage étudié: ILP4 pour « Incongru Langage
+    Poilant ». Il sera complété dans les cours qui suivent. La grande
+    nouveauté est que (à la différence de C, de Java, de JavaScript,
+    etc.) toute instruction est maintenant aussi une expression. Cela
+    permet de s'affranchir des différences de syntaxe entre les deux
+    types d'alternatives (if-else et ?:) mais autorise le bloc local (ce
+    que n'autorise pas C ni JavaScript). Le grand avantage est que cela
+    simplifie le code de compilation et permet de parler plus simplement
+    d'intégration de fonctions (inlining).
+  -->
+  <start>
+    <choice>
+      <ref name="programme4"/>
+      <ref name="programme3"/>
+      <ref name="programme2"/>
+      <ref name="programme1"/>
+    </choice>
+  </start>
+  <!--
+    Un programme4 est composé de définitions de fonctions globales
+    suivies d'expressions les mettant en œuvre.
+  -->
+  <define name="programme4">
+    <element name="programme4">
+      <ref name="definitionEtExpressions"/>
+    </element>
+  </define>
+  <define name="programme3">
+    <element name="programme3">
+      <ref name="definitionEtExpressions"/>
+    </element>
+  </define>
+  <define name="programme2">
+    <element name="programme2">
+      <ref name="definitionEtExpressions"/>
+    </element>
+  </define>
+  <define name="programme1">
+    <element name="programme1">
+      <ref name="expression"/>
+    </element>
+  </define>
+  <define name="definitionEtExpressions">
+    <zeroOrMore>
+      <ref name="definitionFonction"/>
+    </zeroOrMore>
+    <oneOrMore>
+      <ref name="expression"/>
+    </oneOrMore>
+  </define>
+  <!--
+    Définition d'une fonction avec son nom, ses variables (éventuellement
+    aucune) et un corps qui est une séquence d'expressions.
+  -->
+  <define name="definitionFonction">
+    <element name="definitionFonction">
+      <attribute name="nom">
+        <data type="Name">
+          <except>
+            <data type="Name">
+              <param name="pattern">(ilp|ILP)</param>
+            </data>
+          </except>
+        </data>
+      </attribute>
+      <element name="variables">
+        <zeroOrMore>
+          <ref name="variable"/>
+        </zeroOrMore>
+      </element>
+      <element name="corps">
+        <oneOrMore>
+          <ref name="expression"/>
+        </oneOrMore>
+      </element>
+    </element>
+  </define>
+  <!-- Les expressions possibles: -->
+  <define name="expression">
+    <choice>
+      <ref name="alternative"/>
+      <ref name="sequence"/>
+      <ref name="blocUnaire"/>
+      <ref name="blocLocal"/>
+      <ref name="boucle"/>
+      <ref name="try"/>
+      <ref name="affectation"/>
+      <ref name="invocation"/>
+      <ref name="constante"/>
+      <ref name="variable"/>
+      <ref name="operation"/>
+      <ref name="invocationPrimitive"/>
+    </choice>
+  </define>
+  <!-- Le si-alors-sinon. L'alternant est facultatif. -->
+  <define name="alternative">
+    <element name="alternative">
+      <element name="condition">
+        <ref name="expression"/>
+      </element>
+      <element name="consequence">
+        <oneOrMore>
+          <ref name="expression"/>
+        </oneOrMore>
+      </element>
+      <optional>
+        <element name="alternant">
+          <oneOrMore>
+            <ref name="expression"/>
+          </oneOrMore>
+        </element>
+      </optional>
+    </element>
+  </define>
+  <!--
+    La séquence qui permet de regrouper plusieurs expressions en une seule.
+    Il est obligatoire qu'il y ait au moins une expression dans la séquence.
+  -->
+  <define name="sequence">
+    <element name="sequence">
+      <oneOrMore>
+        <ref name="expression"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <!--
+    Le bloc local unaire. Il est conservé pour garder les tests associés.
+    Mais on pourrait s'en passer au profit du blocLocal plus général.
+  -->
+  <define name="blocUnaire">
+    <element name="blocUnaire">
+      <ref name="variable"/>
+      <element name="valeur">
+        <ref name="expression"/>
+      </element>
+      <element name="corps">
+        <oneOrMore>
+          <ref name="expression"/>
+        </oneOrMore>
+      </element>
+    </element>
+  </define>
+  <!--
+    Un bloc local qui introduit un nombre quelconque (éventuellement nul)
+    de variables locales associées à une valeur initiale (calculée avec
+    une expression).
+  -->
+  <define name="blocLocal">
+    <element name="blocLocal">
+      <element name="liaisons">
+        <zeroOrMore>
+          <element name="liaison">
+            <ref name="variable"/>
+            <element name="initialisation">
+              <ref name="expression"/>
+            </element>
+          </element>
+        </zeroOrMore>
+      </element>
+      <element name="corps">
+        <oneOrMore>
+          <ref name="expression"/>
+        </oneOrMore>
+      </element>
+    </element>
+  </define>
+  <!--
+    La boucle tant-que n'a de sens que parce que l'on dispose maintenant
+    de l'affectation.
+  -->
+  <define name="boucle">
+    <element name="boucle">
+      <element name="condition">
+        <ref name="expression"/>
+      </element>
+      <element name="corps">
+        <oneOrMore>
+          <ref name="expression"/>
+        </oneOrMore>
+      </element>
+    </element>
+  </define>
+  <!--
+    L'affectation prend une variable en cible et une expression comme
+    valeur. L'affectation est une expression.
+  -->
+  <define name="affectation">
+    <element name="affectation">
+      <attribute name="nom">
+        <data type="Name">
+          <except>
+            <data type="Name">
+              <param name="pattern">(ilp|ILP)</param>
+            </data>
+          </except>
+        </data>
+      </attribute>
+      <element name="valeur">
+        <ref name="expression"/>
+      </element>
+    </element>
+  </define>
+  <!-- L'invocation d'une fonction définie. -->
+  <define name="invocation">
+    <element name="invocation">
+      <element name="fonction">
+        <ref name="expression"/>
+      </element>
+      <element name="arguments">
+        <zeroOrMore>
+          <ref name="expression"/>
+        </zeroOrMore>
+      </element>
+    </element>
+  </define>
+  <!--
+    Cette définition permet une clause catch ou une clause finally ou
+    encore ces deux clauses à la fois.
+  -->
+  <define name="try">
+    <element name="try">
+      <element name="corps">
+        <oneOrMore>
+          <ref name="expression"/>
+        </oneOrMore>
+      </element>
+      <choice>
+        <ref name="catch"/>
+        <ref name="finally"/>
+        <group>
+          <ref name="catch"/>
+          <ref name="finally"/>
+        </group>
+      </choice>
+    </element>
+  </define>
+  <define name="catch">
+    <element name="catch">
+      <attribute name="exception">
+        <data type="Name">
+          <except>
+            <data type="Name">
+              <param name="pattern">(ilp|ILP)</param>
+            </data>
+          </except>
+        </data>
+      </attribute>
+      <oneOrMore>
+        <ref name="expression"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="finally">
+    <element name="finally">
+      <oneOrMore>
+        <ref name="expression"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <!--
+    Une variable n'est caractérisée que par son nom. Les variables dont
+    les noms comportent la séquence ilp ou ILP sont réservés et ne
+    peuvent être utilisés par les programmeurs.
+  -->
+  <define name="variable">
+    <element name="variable">
+      <attribute name="nom">
+        <data type="Name">
+          <except>
+            <data type="Name">
+              <param name="pattern">(ilp|ILP)</param>
+            </data>
+          </except>
+        </data>
+      </attribute>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    L'invocation d'une fonction primitive. Une fonction primitive est
+    procurée par l'implantation et ne peut (usuellement) être définie
+    par l'utilisateur. Les fonctions primitives sont, pour être
+    utilisables, prédéfinies. Une fonction primitive n'est caractérisée
+    que par son nom (éventuellement masquable).
+  -->
+  <define name="invocationPrimitive">
+    <element name="invocationPrimitive">
+      <attribute name="fonction">
+        <data type="Name">
+          <except>
+            <data type="Name">
+              <param name="pattern">(ilp|ILP)</param>
+            </data>
+          </except>
+        </data>
+      </attribute>
+      <zeroOrMore>
+        <ref name="expression"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!--
+    Les operations sont en fait des sortes d'invocations a des fonctions
+    primitives sauf que ces fonctions sont implantées par le matériel
+    par des instructions particulières. On ne distingue que les
+    opérations unaires et binaires (les plus usuelles):
+  -->
+  <define name="operation">
+    <choice>
+      <ref name="operationUnaire"/>
+      <ref name="operationBinaire"/>
+    </choice>
+  </define>
+  <define name="operationUnaire">
+    <element name="operationUnaire">
+      <attribute name="operateur">
+        <choice>
+          <value>-</value>
+          <value>!</value>
+        </choice>
+      </attribute>
+      <element name="operande">
+        <ref name="expression"/>
+      </element>
+    </element>
+  </define>
+  <define name="operationBinaire">
+    <element name="operationBinaire">
+      <element name="operandeGauche">
+        <ref name="expression"/>
+      </element>
+      <attribute name="operateur">
+        <choice>
+          <value>+</value>
+          <value>-</value>
+          <value>*</value>
+          <value>/</value>
+          <value>%</value>
+          <!-- arithmétiques -->
+          <value>|</value>
+          <value>&amp;</value>
+          <value>^</value>
+          <!-- booléens -->
+          <value>&lt;</value>
+          <value>&lt;=</value>
+          <value>==</value>
+          <value>&gt;=</value>
+          <value>&gt;</value>
+          <value>&lt;&gt;</value>
+          <value>!=</value>
+        </choice>
+        <!-- comparaisons -->
+      </attribute>
+      <element name="operandeDroit">
+        <ref name="expression"/>
+      </element>
+    </element>
+  </define>
+  <!--
+    Les constantes sont les données qui peuvent apparaître dans les
+    programmes sous forme textuelle (ou littérale comme l'on dit
+    souvent). Ici l'on trouve toutes les constantes usuelles à part les
+    caractères:
+  -->
+  <define name="constante">
+    <choice>
+      <element name="entier">
+        <attribute name="valeur">
+          <data type="integer"/>
+        </attribute>
+        <empty/>
+      </element>
+      <element name="flottant">
+        <attribute name="valeur">
+          <data type="float"/>
+        </attribute>
+        <empty/>
+      </element>
+      <element name="chaine">
+        <text/>
+      </element>
+      <element name="booleen">
+        <attribute name="valeur">
+          <choice>
+            <value>true</value>
+            <value>false</value>
+          </choice>
+        </attribute>
+        <empty/>
+      </element>
+    </choice>
+  </define>
+</grammar>
+<!-- fin de grammar4.rnc -->

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u63-3.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "signaler l'exception fait bien sortir du corps")
+(let ((x 1))
+  (try-catch-finally
+    (begin 
+      (throw 11)
+      (set! x 4) )
+    #f
+    (set! x (+ 4 x)) )
+  (print x)
+  (= x 5) )
+
+;;; end of u63-3.scm
+
+ -->
+<programme3
+><!-- test:name description='signaler l'exception fait bien sortir du corps' 
+--><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='1'
+/></valeur
+><corps
+><try
+><corps
+><sequence
+><invocationPrimitive fonction='throw'
+><entier valeur='11'
+/></invocationPrimitive
+><affectation nom='x'
+><valeur
+><entier valeur='4'
+/></valeur
+></affectation
+></sequence
+></corps
+><finally
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='+'
+><operandeGauche
+><entier valeur='4'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></finally
+></try
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='5'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme3
+>

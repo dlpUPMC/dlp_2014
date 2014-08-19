@@ -1,0 +1,83 @@
+# -*- coding: utf-8 -*-
+# ******************************************************************
+# ILP - Implantation d'un langage de programmation.
+# Copyright (C) 2004 <Christian.Queinnec@lip6.fr>
+# $Id: grammar2.rnc 477 2006-09-29 13:23:48Z queinnec $
+# GPL version>=2
+# ******************************************************************
+
+# Deuxième version du langage étudié: ILP2 pour « Insipide Langage
+# Prévu » Il sera complété dans les cours qui suivent.
+
+# On étend la grammaire précédente pour accepter des programmes
+# enrichis (définis par la balise programme2) et l'on modifie la
+# notion d'instruction pour accepter la présence des blocs locaux.
+
+include "grammar1.rnc"
+start |= programme2
+instruction |= blocLocal
+instruction |= boucle
+expression |= affectation
+expression |= invocation
+
+# Un programme est une suite de définitions de fonctions suivie
+# d'instructions sauf que les instructions comportent également des
+# blocs locaux (étendant la notion de bloc local unaire précédente),
+# et la boucle tant-que.
+
+programme2 = element programme2 {
+   definitionFonction *,
+   instructions
+}
+
+# Définition d'une fonction avec son nom, ses variables (éventuellement
+# aucune) et un corps qui est une séquence d'instructions.
+# FUTUR: restreindre les noms de fonctions a ceux des variables!
+
+definitionFonction = element definitionFonction {
+   attribute nom     { xsd:Name - ( xsd:Name { pattern = "(ilp|ILP)" } ) },
+   element variables { variable * },
+   element corps     { instructions }
+}
+
+# Un bloc local qui introduit un nombre quelconque (éventuellement nul)
+# de variables locales associées à une valeur initiale (calculée avec
+# une expression).
+
+blocLocal = element blocLocal {
+   element liaisons {
+      element liaison {
+         variable, 
+         element initialisation {
+            expression
+         }
+      } *
+   },
+   element corps { instructions }
+}
+
+# La boucle tant-que n'a de sens que parce que l'on dispose maintenant
+# de l'affectation.
+
+boucle = element boucle {
+   element condition { expression },
+   element corps     { instructions }
+}
+
+# L'affectation prend une variable en cible et une expression comme
+# valeur. L'affectation est une expression.
+# FUTUR: restreindre les noms de variables!
+
+affectation = element affectation {
+   attribute nom  { xsd:Name - ( xsd:Name { pattern = "(ilp|ILP)" } ) },
+   element valeur { expression }
+}
+
+# L'invocation d'une fonction définie.
+
+invocation = element invocation {
+   element fonction  { expression },
+   element arguments { expression * }
+}
+
+# fin de grammar2.rnc

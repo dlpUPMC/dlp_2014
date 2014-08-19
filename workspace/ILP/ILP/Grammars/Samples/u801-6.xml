@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u801-6.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Creation d'une classe sans champ ni methode")
+(expected-result 801)
+
+(defclass Point Object 
+  () )
+801
+
+;;; end of u801-6.scm
+
+ -->
+<programme6
+><!-- test:name description='Creation d'une classe sans champ ni methode' 
+--><!-- test:result value='801' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+></champs
+><methodes
+></methodes
+></definitionClasse
+><entier valeur='801'
+/></programme6
+>

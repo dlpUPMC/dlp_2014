@@ -1,0 +1,21 @@
+-*- coding: utf-8 -*-
+******************************************************************
+ILP - - Implantation d'un langage de programmation.
+Copyright (C) 2006-2012 <Christian.Queinnec@lip6.fr>
+$Id: C.readme 1238 2012-09-12 15:31:08Z queinnec $
+GPL version>=2
+****************************************************************** 
+
+Ce répertoire contient la bibliothèque d'exécution des différentes
+versions d'ILP. Le Makefile contient les règles de reconstruction. La
+commande 'make' sans argument devrait suffire. Si vous souhaitez
+utiliser un GC (glaneur de cellule ou garbage collector), il faut
+installer le gc de Boehm présent dans gc*.tgz et, pour cela,
+tourner:
+
+    make compile.gc
+
+Si les tests du GC passent, vous pouvez utiliser l'option +gc dans
+compileThenRun.sh. Cette option est utile à partir d'ILP6.
+
+#fin.

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u72-4.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "alternative et bloc local en argument")
+(define (foo x y)
+  (+ x y) )
+(foo (if #t 8 1)
+     (let ((x 8)) (* x x)) )
+
+;;; end of u72-4.scm
+
+ -->
+<programme2
+><!-- test:name description='alternative et bloc local en argument' 
+--><definitionFonction nom='foo'
+><variables
+><variable nom='x'
+/><variable nom='y'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><variable nom='y'
+/></operandeDroit
+></operationBinaire
+></corps
+></definitionFonction
+><invocation
+><fonction
+><variable nom='foo'
+/></fonction
+><arguments
+><alternative
+><condition
+><booleen valeur='true'
+/></condition
+><consequence
+><entier valeur='8'
+/></consequence
+><alternant
+><entier valeur='1'
+/></alternant
+></alternative
+><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='8'
+/></valeur
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></arguments
+></invocation
+></programme2
+>

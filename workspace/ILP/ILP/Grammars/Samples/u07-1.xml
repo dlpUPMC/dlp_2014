@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u07-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "operateur unaire -" -34)
+(- 34)
+
+;;; end of u7-1.scm
+
+ -->
+<programme1
+><!-- test:name description='operateur unaire -' 
+--><operationUnaire operateur='-'
+><operande
+><entier valeur='34'
+/></operande
+></operationUnaire
+></programme1
+>

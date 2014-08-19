@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u31-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "addition contagieuse" 28.3)
+(let ((i 22))
+  (let ((f 6.3))
+    (+ f i) ) )
+
+;;; end of u31-1.scm
+
+ -->
+<programme1
+><!-- test:name description='addition contagieuse' 
+--><blocUnaire
+><variable nom='i'
+/><valeur
+><entier valeur='22'
+/></valeur
+><corps
+><blocUnaire
+><variable nom='f'
+/><valeur
+><flottant valeur='6.3'
+/></valeur
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='f'
+/></operandeGauche
+><operandeDroit
+><variable nom='i'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></corps
+></blocUnaire
+></programme1
+>

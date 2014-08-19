@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u833-6.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Masquage d'une methode predefinie: print sur sous-classe")
+(expected-result 833)
+
+(defclass Point Object
+  (x y)
+  (define (print)
+    832 ) )
+
+(defclass PointColore Point 
+  (color)
+  (define (print)
+    833 ) )
+
+(send "print" (new PointColore 11 22 "red"))
+
+;;; end of u833-6.scm
+
+ -->
+<programme6
+><!-- test:name description='Masquage d'une methode predefinie: print sur sous-classe' 
+--><!-- test:result value='833' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/><champ nom='y'
+/></champs
+><methodes
+><methode nom='print'
+><variables
+></variables
+><corps
+><entier valeur='832'
+/></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='PointColore' parent='Point'
+><champs
+><champ nom='color'
+/></champs
+><methodes
+><methode nom='print'
+><variables
+></variables
+><corps
+><entier valeur='833'
+/></corps
+></methode
+></methodes
+></definitionClasse
+><envoiMessage message='print'
+><receveur
+><creationObjet classe='PointColore'
+><entier valeur='11'
+/><entier valeur='22'
+/><chaine
+>red</chaine
+></creationObjet
+></receveur
+><arguments
+></arguments
+></envoiMessage
+></programme6
+>

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u12-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "operateur binaire *" 12)
+(* 3 4)
+
+;;; end of u12-1.scm
+
+ -->
+<programme1
+><!-- test:name description='operateur binaire *' 
+--><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='3'
+/></operandeGauche
+><operandeDroit
+><entier valeur='4'
+/></operandeDroit
+></operationBinaire
+></programme1
+>

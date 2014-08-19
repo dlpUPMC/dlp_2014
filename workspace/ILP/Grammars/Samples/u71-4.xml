@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u71-4.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "bloc local en expression")
+(if (let ((x #t))
+      x )
+    1
+    2 )
+
+;;; end of u71-4.scm
+
+ -->
+<programme1
+><!-- test:name description='bloc local en expression' 
+--><alternative
+><condition
+><blocUnaire
+><variable nom='x'
+/><valeur
+><booleen valeur='true'
+/></valeur
+><corps
+><variable nom='x'
+/></corps
+></blocUnaire
+></condition
+><consequence
+><entier valeur='1'
+/></consequence
+><alternant
+><entier valeur='2'
+/></alternant
+></alternative
+></programme1
+>

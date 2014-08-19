@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u815-6.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Point + 1 methode zeroaire avec self")
+(expected-result 812)
+
+(defclass Point Object
+  (x y)
+  (define (longueur)
+    (+ (oget (self) "x") (oget (self) "y")) ) )
+(let ((point (new Point 810 002)))
+  (send "longueur" point) )
+
+;;; end of u815-6.scm
+
+ -->
+<programme6
+><!-- test:name description='Point + 1 methode zeroaire avec self' 
+--><!-- test:result value='812' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/><champ nom='y'
+/></champs
+><methodes
+><methode nom='longueur'
+><variables
+></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><lectureChamp champ='x'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><lectureChamp champ='y'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocUnaire
+><variable nom='point'
+/><valeur
+><creationObjet classe='Point'
+><entier valeur='810'
+/><entier valeur='2'
+/></creationObjet
+></valeur
+><corps
+><envoiMessage message='longueur'
+><receveur
+><variable nom='point'
+/></receveur
+><arguments
+></arguments
+></envoiMessage
+></corps
+></blocUnaire
+></programme6
+>

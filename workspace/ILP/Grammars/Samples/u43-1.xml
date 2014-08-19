@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u43-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "invocation primitive print (booleen)")
+(print (< 4 5))
+
+;;; end of u43-1.scm
+
+ -->
+<programme1
+><!-- test:name description='invocation primitive print (booleen)' 
+--><invocationPrimitive fonction='print'
+><operationBinaire operateur='&lt;'
+><operandeGauche
+><entier valeur='4'
+/></operandeGauche
+><operandeDroit
+><entier valeur='5'
+/></operandeDroit
+></operationBinaire
+></invocationPrimitive
+></programme1
+>

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u59015-2.scm 620 2007-01-07 14:24:50Z queinnec $
+(comment "Affectation en position d'argument (et conflit noms de variables)")
+
+(define (foo x)
+  (* 2 x) )
+
+;;; Cette pseudo-sequence repose sur le fait que le compilateur et
+;;; l'evaluateur evaluent les arguments de la gauche vers la droite.
+(define (pseudosequence one two)
+  two )
+
+(let ((x 11)) ; Ici on choisit le nom x pour provoquer un conflit
+  (foo (pseudosequence (set! x (+ x 1))
+                        x )) )
+
+;;; end of u59015-2.scm
+
+ -->
+<programme2
+><!-- test:name description='Affectation en position d'argument (et conflit noms de variables)' 
+--><definitionFonction nom='foo'
+><variables
+><variable nom='x'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='2'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></corps
+></definitionFonction
+><definitionFonction nom='pseudosequence'
+><variables
+><variable nom='one'
+/><variable nom='two'
+/></variables
+><corps
+><variable nom='two'
+/></corps
+></definitionFonction
+><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='11'
+/></valeur
+><corps
+><invocation
+><fonction
+><variable nom='foo'
+/></fonction
+><arguments
+><invocation
+><fonction
+><variable nom='pseudosequence'
+/></fonction
+><arguments
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='1'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+><variable nom='x'
+/></arguments
+></invocation
+></arguments
+></invocation
+></corps
+></blocUnaire
+></programme2
+>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u65-3.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Le catcher recupere bien l'exception et le finally tourne")
+(let ((x 1))
+  (try-catch-finally
+    (begin 
+      (throw 6)
+      (set! x 4) )
+    (lambda (exc)
+      (set! x exc) )
+    (set! x (+ 1 x)) )
+  (print x)
+  (= x 7) )
+
+;;; end of u65-3.scm
+
+ -->
+<programme3
+><!-- test:name description='Le catcher recupere bien l'exception et le finally tourne' 
+--><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='1'
+/></valeur
+><corps
+><try
+><corps
+><sequence
+><invocationPrimitive fonction='throw'
+><entier valeur='6'
+/></invocationPrimitive
+><affectation nom='x'
+><valeur
+><entier valeur='4'
+/></valeur
+></affectation
+></sequence
+></corps
+><catch exception='exc'
+><affectation nom='x'
+><valeur
+><variable nom='exc'
+/></valeur
+></affectation
+></catch
+><finally
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='+'
+><operandeGauche
+><entier valeur='1'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></finally
+></try
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='7'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme3
+>

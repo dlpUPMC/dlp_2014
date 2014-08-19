@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u33-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "bloc unaire avec sequence implicite" 55)
+(let ((u 33))
+  "foobar"
+  (+ u 22) )
+
+;;; end of u33-1.scm
+
+ -->
+<programme1
+><!-- test:name description='bloc unaire avec sequence implicite' 
+--><blocUnaire
+><variable nom='u'
+/><valeur
+><entier valeur='33'
+/></valeur
+><corps
+><chaine
+>foobar</chaine
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='u'
+/></operandeGauche
+><operandeDroit
+><entier valeur='22'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme1
+>

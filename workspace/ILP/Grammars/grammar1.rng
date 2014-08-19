@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!--
+    -*- coding: utf-8 -*-
+    ******************************************************************
+    ILP - Implantation d'un langage de programmation.
+    Copyright (C) 2004 <Christian.Queinnec@lip6.fr>
+    $Id: grammar1.rnc 477 2006-09-29 13:23:48Z queinnec $
+    GPL version>=2
+    ******************************************************************
+  -->
+  <!--
+    Première version du langage étudié: ILP1 pour « Innocent Langage
+    Parachuté. » Il sera complété dans les cours qui suivent.
+  -->
+  <start>
+    <ref name="programme1"/>
+  </start>
+  <define name="programme1">
+    <element name="programme1">
+      <ref name="instructions"/>
+    </element>
+  </define>
+  <define name="instructions">
+    <oneOrMore>
+      <ref name="instruction"/>
+    </oneOrMore>
+  </define>
+  <!--
+    Ce langage est un langage d'instructions, assez réduit pour
+    l'instant. Voici les instructions possibles:
+  -->
+  <define name="instruction">
+    <choice>
+      <ref name="alternative"/>
+      <ref name="sequence"/>
+      <ref name="blocUnaire"/>
+      <ref name="expression"/>
+    </choice>
+  </define>
+  <!--
+    Le si-alors-sinon. L'alternant est facultatif car c'est un langage
+    d'instructions.
+  -->
+  <define name="alternative">
+    <element name="alternative">
+      <element name="condition">
+        <ref name="expression"/>
+      </element>
+      <element name="consequence">
+        <ref name="instructions"/>
+      </element>
+      <optional>
+        <element name="alternant">
+          <ref name="instructions"/>
+        </element>
+      </optional>
+    </element>
+  </define>
+  <!--
+    La séquence qui permet de regrouper plusieurs instructions en une seule.
+    Il est obligatoire qu'il y ait au moins une instruction dans la séquence.
+  -->
+  <define name="sequence">
+    <element name="sequence">
+      <ref name="instructions"/>
+    </element>
+  </define>
+  <!--
+    Un bloc local unaire. C'est, pour l'instant, la seule construction
+    permettant d'introduire une variable localement. Elle sera bientôt remplacée
+    par une construction permettant d'introduire plusieurs variables
+    locales en meme temps.
+  -->
+  <define name="blocUnaire">
+    <element name="blocUnaire">
+      <ref name="variable"/>
+      <element name="valeur">
+        <ref name="expression"/>
+      </element>
+      <element name="corps">
+        <ref name="instructions"/>
+      </element>
+    </element>
+  </define>
+  <!--
+    Comme en C, une expression est une instruction dont la valeur est
+    ignorée. Il n'y a pas d'expression parenthésée car ce n'est qu'une
+    fioriture syntaxique. Les expressions sont:
+  -->
+  <define name="expression">
+    <choice>
+      <ref name="constante"/>
+      <ref name="variable"/>
+      <ref name="operation"/>
+      <ref name="invocationPrimitive"/>
+    </choice>
+  </define>
+  <!--
+    Une variable n'est caractérisée que par son nom. Les variables dont
+    les noms comportent la séquence ilp ou ILP sont réservés et ne
+    peuvent être utilisés par les programmeurs.
+    FUTUR: restreindre plus les noms de variables aux seuls caracteres normaux!
+  -->
+  <define name="variable">
+    <element name="variable">
+      <attribute name="nom">
+        <data type="Name">
+          <except>
+            <data type="Name">
+              <param name="pattern">(ilp|ILP)</param>
+            </data>
+          </except>
+        </data>
+      </attribute>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    L'invocation d'une fonction primitive. Une fonction primitive est
+    procurée par l'implantation et ne peut (usuellement) être définie
+    par l'utilisateur. Les fonctions primitives sont, pour être
+    utilisables, prédéfinies. Une fonction primitive n'est caractérisée
+    que par son nom (éventuellement masquable).
+  -->
+  <define name="invocationPrimitive">
+    <element name="invocationPrimitive">
+      <attribute name="fonction">
+        <data type="Name"/>
+      </attribute>
+      <zeroOrMore>
+        <ref name="expression"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!--
+    Les opérations sont en fait des sortes d'invocations à des fonctions
+    primitives sauf que ces fonctions sont implantées par le matériel
+    par des instructions particulières. On ne distingue que les
+    opérations unaires et binaires (les plus usuelles):
+  -->
+  <define name="operation">
+    <choice>
+      <ref name="operationUnaire"/>
+      <ref name="operationBinaire"/>
+    </choice>
+  </define>
+  <define name="operationUnaire">
+    <element name="operationUnaire">
+      <attribute name="operateur">
+        <choice>
+          <value>-</value>
+          <value>!</value>
+        </choice>
+      </attribute>
+      <element name="operande">
+        <ref name="expression"/>
+      </element>
+    </element>
+  </define>
+  <define name="operationBinaire">
+    <element name="operationBinaire">
+      <element name="operandeGauche">
+        <ref name="expression"/>
+      </element>
+      <attribute name="operateur">
+        <choice>
+          <value>+</value>
+          <value>-</value>
+          <value>*</value>
+          <value>/</value>
+          <value>%</value>
+          <!-- arithmétiques -->
+          <value>|</value>
+          <value>&amp;</value>
+          <value>^</value>
+          <!-- booléens -->
+          <value>&lt;</value>
+          <value>&lt;=</value>
+          <value>==</value>
+          <value>&gt;=</value>
+          <value>&gt;</value>
+          <value>&lt;&gt;</value>
+          <value>!=</value>
+        </choice>
+        <!-- comparaisons -->
+      </attribute>
+      <element name="operandeDroit">
+        <ref name="expression"/>
+      </element>
+    </element>
+  </define>
+  <!--
+    Les constantes sont les données qui peuvent apparaître dans les
+    programmes sous forme textuelle (ou littérale comme l'on dit
+    souvent). Ici l'on trouve toutes les constantes usuelles à part les
+    caractères:
+  -->
+  <define name="constante">
+    <choice>
+      <element name="entier">
+        <attribute name="valeur">
+          <data type="integer"/>
+        </attribute>
+        <empty/>
+      </element>
+      <element name="flottant">
+        <attribute name="valeur">
+          <data type="float"/>
+        </attribute>
+        <empty/>
+      </element>
+      <element name="chaine">
+        <text/>
+      </element>
+      <element name="booleen">
+        <attribute name="valeur">
+          <choice>
+            <value>true</value>
+            <value>false</value>
+          </choice>
+        </attribute>
+        <empty/>
+      </element>
+    </choice>
+  </define>
+</grammar>
+<!-- fin. -->

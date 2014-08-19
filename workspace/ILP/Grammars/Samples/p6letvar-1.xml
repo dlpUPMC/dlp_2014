@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+  Le programme est:
+     { x = 3;
+       x+4 ; 
+     }
+-->
+<programme1>
+  <blocUnaire>
+    <variable nom='x'/>
+    <valeur>
+      <entier valeur='3'/>
+    </valeur>
+    <corps>
+      <sequence>
+        <operationBinaire operateur="+">
+          <operandeGauche>
+            <entier valeur="4"/>
+          </operandeGauche>
+          <operandeDroit>
+            <variable nom='x'/>
+          </operandeDroit>
+        </operationBinaire>
+      </sequence>
+    </corps>
+  </blocUnaire>
+</programme1>

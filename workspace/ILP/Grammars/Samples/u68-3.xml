@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u68-3.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "exception dans catcher")
+(let ((x 1))
+  (try-catch-finally
+    (try-catch-finally
+      (begin 
+        (throw 4)
+        (set! x 44) )
+      (lambda (exc)
+        (throw (* 2 exc)) )
+      (set! x (* 3 x)) )
+    (lambda (exc)
+      (set! x (* 5 (* x exc))) )
+    #f )
+  (print x)
+  (= x 120) )
+
+;;; end of u68-3.scm
+
+ -->
+<programme3
+><!-- test:name description='exception dans catcher' 
+--><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='1'
+/></valeur
+><corps
+><try
+><corps
+><try
+><corps
+><sequence
+><invocationPrimitive fonction='throw'
+><entier valeur='4'
+/></invocationPrimitive
+><affectation nom='x'
+><valeur
+><entier valeur='44'
+/></valeur
+></affectation
+></sequence
+></corps
+><catch exception='exc'
+><invocationPrimitive fonction='throw'
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='2'
+/></operandeGauche
+><operandeDroit
+><variable nom='exc'
+/></operandeDroit
+></operationBinaire
+></invocationPrimitive
+></catch
+><finally
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='3'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></finally
+></try
+></corps
+><catch exception='exc'
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='5'
+/></operandeGauche
+><operandeDroit
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><variable nom='exc'
+/></operandeDroit
+></operationBinaire
+></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></catch
+></try
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='120'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme3
+>

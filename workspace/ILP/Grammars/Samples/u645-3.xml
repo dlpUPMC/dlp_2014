@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u645-3.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Le catcher recupere bien une exception interne")
+(expected-result #t)
+(expected-printing 6)
+(let ((x 1))
+  (try-catch-finally
+    (begin 
+      (+ 3 "foo")
+      (set! x 4) )
+    (lambda (exc)
+      (set! x (+ 5 x)) )
+    #f )
+  (print x)
+  (= x 6) )
+
+;;; end of u645-3.scm
+
+ -->
+<programme3
+><!-- test:name description='Le catcher recupere bien une exception interne' 
+--><!-- test:result value='#t' 
+--><!-- test:printing value='...a faire...' 
+--><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='1'
+/></valeur
+><corps
+><try
+><corps
+><sequence
+><operationBinaire operateur='+'
+><operandeGauche
+><entier valeur='3'
+/></operandeGauche
+><operandeDroit
+><chaine
+>foo</chaine
+></operandeDroit
+></operationBinaire
+><affectation nom='x'
+><valeur
+><entier valeur='4'
+/></valeur
+></affectation
+></sequence
+></corps
+><catch exception='exc'
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='+'
+><operandeGauche
+><entier valeur='5'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></catch
+></try
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='6'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme3
+>

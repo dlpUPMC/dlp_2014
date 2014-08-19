@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u807-6.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Creation d'une classe avec 2 champs sans methode")
+(expected-result 807)
+
+(defclass Point Object 
+  (x y) )
+807
+
+;;; end of u807-6.scm
+
+ -->
+<programme6
+><!-- test:name description='Creation d'une classe avec 2 champs sans methode' 
+--><!-- test:result value='807' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/><champ nom='y'
+/></champs
+><methodes
+></methodes
+></definitionClasse
+><entier valeur='807'
+/></programme6
+>

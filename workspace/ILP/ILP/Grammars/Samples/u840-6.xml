@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u840-6.scm 620 2007-01-07 14:24:50Z queinnec $
+(comment "super() simple")
+(expected-result 840)
+
+(defclass Point Object
+  (x)
+  (define (m1)
+    (oget (self) "x")) )
+
+(defclass Point2D Point
+  (y)
+  (define (m1)
+    (* (oget (self) "y")
+       (super) ) ) )
+
+(let ((pc (new Point2D 10 84)))
+  (try-catch-finally
+   (send "m1" pc)
+   (lambda (e) #f)
+   #f ) )
+
+;;; end of u840-6.scm
+
+ -->
+<programme6
+><!-- test:name description='super() simple' 
+--><!-- test:result value='840' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+></variables
+><corps
+><lectureChamp champ='x'
+><cible
+><moi
+/></cible
+></lectureChamp
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point2D' parent='Point'
+><champs
+><champ nom='y'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><lectureChamp champ='y'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocUnaire
+><variable nom='pc'
+/><valeur
+><creationObjet classe='Point2D'
+><entier valeur='10'
+/><entier valeur='84'
+/></creationObjet
+></valeur
+><corps
+><try
+><corps
+><envoiMessage message='m1'
+><receveur
+><variable nom='pc'
+/></receveur
+><arguments
+></arguments
+></envoiMessage
+></corps
+><catch exception='e'
+><booleen valeur='false'
+/></catch
+></try
+></corps
+></blocUnaire
+></programme6
+>

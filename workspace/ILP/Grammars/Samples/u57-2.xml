@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u57-2.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "bloc local multiple")
+(let ((x 51)
+      (y 6) )
+  (+ x y) )
+
+;;; end of u57-2.scm
+
+ -->
+<programme2
+><!-- test:name description='bloc local multiple' 
+--><blocLocal
+><liaisons
+><liaison
+><variable nom='x'
+/><initialisation
+><entier valeur='51'
+/></initialisation
+></liaison
+><liaison
+><variable nom='y'
+/><initialisation
+><entier valeur='6'
+/></initialisation
+></liaison
+></liaisons
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><variable nom='y'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocLocal
+></programme2
+>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+  Le programme est:
+       - 24;
+-->
+<programme1>
+  <operationUnaire operateur="-">
+    <operande>
+      <entier valeur="24"/>
+    </operande>
+  </operationUnaire>
+</programme1>

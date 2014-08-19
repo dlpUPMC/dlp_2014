@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+  Le programme est:
+   { 1 ; 
+     true ; 
+   }
+-->
+<programme1>
+  <sequence>
+    <entier valeur='1'/>
+    <booleen valeur='true'/>
+  </sequence>
+</programme1>

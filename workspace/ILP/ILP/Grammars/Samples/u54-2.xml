@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u54-2.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "une fonction globale")
+(define (deuxfois x)
+  (* 2 x) )
+(deuxfois 27)
+
+;;; end of u54-2.scm
+
+ -->
+<programme2
+><!-- test:name description='une fonction globale' 
+--><definitionFonction nom='deuxfois'
+><variables
+><variable nom='x'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='2'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></corps
+></definitionFonction
+><invocation
+><fonction
+><variable nom='deuxfois'
+/></fonction
+><arguments
+><entier valeur='27'
+/></arguments
+></invocation
+></programme2
+>

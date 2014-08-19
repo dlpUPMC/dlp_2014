@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u21-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "sequence" "foobar")
+(begin 1 2.2 #t "foobar")
+
+;;; end of u21-1.scm
+
+ -->
+<programme1
+><!-- test:name description='sequence' 
+--><sequence
+><entier valeur='1'
+/><flottant valeur='2.2'
+/><booleen valeur='true'
+/><chaine
+>foobar</chaine
+></sequence
+></programme1
+>

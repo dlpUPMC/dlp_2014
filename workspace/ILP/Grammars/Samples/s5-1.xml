@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: s5-1.scm 405 2006-09-13 17:21:53Z queinnec $
+
+(let ((a 23))
+  (+ a 3) )
+
+;;; end of s5-1.scm
+
+ -->
+<programme1
+><blocUnaire
+><variable nom='a'
+/><valeur
+><entier valeur='23'
+/></valeur
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='a'
+/></operandeGauche
+><operandeDroit
+><entier valeur='3'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme1
+>

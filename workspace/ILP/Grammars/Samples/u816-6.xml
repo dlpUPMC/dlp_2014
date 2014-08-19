@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u816-6.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Point + 1 methode binaire avec self")
+(expected-result 13)
+
+(defclass Point Object
+  (x y)
+  (define (m1 z t)
+    (+ (* z (oget (self) "x"))
+       (* t (oget (self) "y")) ) ) )
+(let ((point (new Point 2 3)))
+  (send "m1" point 2 3) )
+
+;;; end of u816-6.scm
+
+ -->
+<programme6
+><!-- test:name description='Point + 1 methode binaire avec self' 
+--><!-- test:result value='13' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/><champ nom='y'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='z'
+/><variable nom='t'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='z'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='x'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></operandeGauche
+><operandeDroit
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='t'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='y'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocUnaire
+><variable nom='point'
+/><valeur
+><creationObjet classe='Point'
+><entier valeur='2'
+/><entier valeur='3'
+/></creationObjet
+></valeur
+><corps
+><envoiMessage message='m1'
+><receveur
+><variable nom='point'
+/></receveur
+><arguments
+><entier valeur='2'
+/><entier valeur='3'
+/></arguments
+></envoiMessage
+></corps
+></blocUnaire
+></programme6
+>

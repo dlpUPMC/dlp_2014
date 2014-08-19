@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u15-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "operateur binaire &lt; (resultat vrai)" #t)
+(< 33 44)
+
+;;; end of u15-1.scm
+
+ -->
+<programme1
+><!-- test:name description='operateur binaire &lt; (resultat vrai)' 
+--><operationBinaire operateur='&lt;'
+><operandeGauche
+><entier valeur='33'
+/></operandeGauche
+><operandeDroit
+><entier valeur='44'
+/></operandeDroit
+></operationBinaire
+></programme1
+>

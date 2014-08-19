@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u23-1.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "alternative (alternant)" 2)
+(if #f 1 2)
+
+;;; end of u23-1.scm
+
+ -->
+<programme1
+><!-- test:name description='alternative (alternant)' 
+--><alternative
+><condition
+><booleen valeur='false'
+/></condition
+><consequence
+><entier valeur='1'
+/></consequence
+><alternant
+><entier valeur='2'
+/></alternant
+></alternative
+></programme1
+>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u60-3.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "le corps tourne")
+(let ((x 1))
+  (try-catch-finally
+    (set! x 2)
+    #f
+    (print x) )
+  (print x)
+  (= x 2) )
+
+;;; end of u60-3.scm
+
+ -->
+<programme3
+><!-- test:name description='le corps tourne' 
+--><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='1'
+/></valeur
+><corps
+><try
+><corps
+><affectation nom='x'
+><valeur
+><entier valeur='2'
+/></valeur
+></affectation
+></corps
+><finally
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+></finally
+></try
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='2'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme3
+>

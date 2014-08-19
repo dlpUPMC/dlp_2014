@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- 
+  Le programme est:
+     { x = 3;
+       4.14 ; 
+     }
+-->
+<programme1>
+  <blocUnaire>
+    <variable nom='x'/>
+    <valeur>
+      <entier valeur='3'/>
+    </valeur>
+    <corps>
+      <sequence>
+        <flottant valeur='4.14'/>
+      </sequence>
+    </corps>
+  </blocUnaire>
+</programme1>

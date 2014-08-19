@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u844-6.scm 620 2007-01-07 14:24:50Z queinnec $
+(comment "super(arg1 arg2) double et renommage")
+(expected-result 844)
+
+(defclass Point Object
+  (x)
+  (define (m1 u t)
+    (* u (oget (self) "x"))) )
+
+(defclass Point2D Point
+  (y)
+  (define (m1 t u)
+    (+ (* u (oget (self) "y"))
+       (super) ) ) )
+
+(defclass Point3D Point2D
+  (z)
+  (define (m1 t u)
+    (+ (oget (self) "z")
+       (super) ) ) )
+
+(let ((pc (new Point3D 400 10 14)))
+  (try-catch-finally
+   (send "m1" pc 2 3) ; 14 + 3*10 + 2*400
+   (lambda (e) #f)
+   #f ) )
+
+;;; end of u844-6.scm
+
+ -->
+<programme6
+><!-- test:name description='super(arg1 arg2) double et renommage' 
+--><!-- test:result value='844' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='u'
+/><variable nom='t'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='u'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='x'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point2D' parent='Point'
+><champs
+><champ nom='y'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='t'
+/><variable nom='u'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='u'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='y'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point3D' parent='Point2D'
+><champs
+><champ nom='z'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='t'
+/><variable nom='u'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><lectureChamp champ='z'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocUnaire
+><variable nom='pc'
+/><valeur
+><creationObjet classe='Point3D'
+><entier valeur='400'
+/><entier valeur='10'
+/><entier valeur='14'
+/></creationObjet
+></valeur
+><corps
+><try
+><corps
+><envoiMessage message='m1'
+><receveur
+><variable nom='pc'
+/></receveur
+><arguments
+><entier valeur='2'
+/><entier valeur='3'
+/></arguments
+></envoiMessage
+></corps
+><catch exception='e'
+><booleen valeur='false'
+/></catch
+></try
+></corps
+></blocUnaire
+></programme6
+>

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u66-3.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "tous les finally tournent")
+(let ((x 0))
+  (try-catch-finally
+    (begin 
+      (set! x (+ x 1))
+      (try-catch-finally
+        (begin 
+          (set! x (+ x 10))
+          (throw x) )
+        #f
+        (begin
+          (print x)
+          (set! x (* 2 x)) ) ) )
+    #f
+    (begin 
+      (print x)
+      (set! x (* 3 x)) ) )
+  (= x 66) )
+
+;;; end of u66-3.scm
+
+ -->
+<programme3
+><!-- test:name description='tous les finally tournent' 
+--><blocUnaire
+><variable nom='x'
+/><valeur
+><entier valeur='0'
+/></valeur
+><corps
+><try
+><corps
+><sequence
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='1'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+><try
+><corps
+><sequence
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='10'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+><invocationPrimitive fonction='throw'
+><variable nom='x'
+/></invocationPrimitive
+></sequence
+></corps
+><finally
+><sequence
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='2'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></sequence
+></finally
+></try
+></sequence
+></corps
+><finally
+><sequence
+><invocationPrimitive fonction='print'
+><variable nom='x'
+/></invocationPrimitive
+><affectation nom='x'
+><valeur
+><operationBinaire operateur='*'
+><operandeGauche
+><entier valeur='3'
+/></operandeGauche
+><operandeDroit
+><variable nom='x'
+/></operandeDroit
+></operationBinaire
+></valeur
+></affectation
+></sequence
+></finally
+></try
+><operationBinaire operateur='=='
+><operandeGauche
+><variable nom='x'
+/></operandeGauche
+><operandeDroit
+><entier valeur='66'
+/></operandeDroit
+></operationBinaire
+></corps
+></blocUnaire
+></programme3
+>

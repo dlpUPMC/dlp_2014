@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u843-6.scm 620 2007-01-07 14:24:50Z queinnec $
+(comment "super(arg1 arg2) avec une classe entre")
+(expected-result 843)
+
+(defclass Point Object
+  (x)
+  (define (m1 t u)
+    (+ u (oget (self) "x"))) )
+
+(defclass Point2D Point
+  (y) )
+
+(defclass Point3D Point2D
+  (z)
+  (define (m1 t u)
+    (+ (oget (self) "y")
+       (+ t
+          (* (oget (self) "z")
+             (super) ) ) ) ) )
+
+(let ((pc (new Point3D 8 -1 84)))
+  (try-catch-finally
+   (send "m1" pc 4 2) ; -1 + 4 + 84*(2+8)
+   (lambda (e) #f)
+   #f ) )
+
+;;; end of u843-6.scm
+
+ -->
+<programme6
+><!-- test:name description='super(arg1 arg2) avec une classe entre' 
+--><!-- test:result value='843' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='t'
+/><variable nom='u'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='u'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='x'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point2D' parent='Point'
+><champs
+><champ nom='y'
+/></champs
+><methodes
+></methodes
+></definitionClasse
+><definitionClasse nom='Point3D' parent='Point2D'
+><champs
+><champ nom='z'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='t'
+/><variable nom='u'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><lectureChamp champ='y'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='t'
+/></operandeGauche
+><operandeDroit
+><operationBinaire operateur='*'
+><operandeGauche
+><lectureChamp champ='z'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></operandeDroit
+></operationBinaire
+></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocUnaire
+><variable nom='pc'
+/><valeur
+><creationObjet classe='Point3D'
+><entier valeur='8'
+/><entier valeur='-1'
+/><entier valeur='84'
+/></creationObjet
+></valeur
+><corps
+><try
+><corps
+><envoiMessage message='m1'
+><receveur
+><variable nom='pc'
+/></receveur
+><arguments
+><entier valeur='4'
+/><entier valeur='2'
+/></arguments
+></envoiMessage
+></corps
+><catch exception='e'
+><booleen valeur='false'
+/></catch
+></try
+></corps
+></blocUnaire
+></programme6
+>

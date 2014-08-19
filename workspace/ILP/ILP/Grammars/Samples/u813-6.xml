@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u813-6.scm 405 2006-09-13 17:21:53Z queinnec $
+(comment "Point + 1 methode binaire sans self")
+(expected-result 813)
+
+(defclass Point Object
+  (x y)
+  (define (m1 z t)
+    (+ z t) ) )
+(let ((point (new Point 11 22)))
+  (send "m1" point 800 13) )
+
+;;; end of u813-6.scm
+
+ -->
+<programme6
+><!-- test:name description='Point + 1 methode binaire sans self' 
+--><!-- test:result value='813' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/><champ nom='y'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='z'
+/><variable nom='t'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><variable nom='z'
+/></operandeGauche
+><operandeDroit
+><variable nom='t'
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocUnaire
+><variable nom='point'
+/><valeur
+><creationObjet classe='Point'
+><entier valeur='11'
+/><entier valeur='22'
+/></creationObjet
+></valeur
+><corps
+><envoiMessage message='m1'
+><receveur
+><variable nom='point'
+/></receveur
+><arguments
+><entier valeur='800'
+/><entier valeur='13'
+/></arguments
+></envoiMessage
+></corps
+></blocUnaire
+></programme6
+>

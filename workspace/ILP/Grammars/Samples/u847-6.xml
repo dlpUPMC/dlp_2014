@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='ISO-8859-15' ?>
+<!-- 
+
+;;; $Id: u847-6.scm 620 2007-01-07 14:24:50Z queinnec $
+(comment "super(arg1 arg2) double avec double hierarchie avec renommage")
+(expected-result 847)
+
+(defclass Point Object
+  (x)
+  (define (m1 tt uu)
+    (* tt (oget (self) "x"))) )
+
+(defclass Point2Da Point
+  (y)
+  (define (m1 ttt uuu)
+    (+ (* uuu (oget (self) "y"))
+       (super) ) ) )
+
+(defclass Point3Da Point2Da
+  (z)
+  (define (m1 tt uu)
+    (+ (oget (self) "z")
+       (super) ) ) ) 
+
+(defclass Point2Db Point
+  (yy)
+  (define (m1 t u)
+    (* (* u (oget (self) "yy"))
+       (super) ) ) )
+
+(defclass Point3Db Point2Db
+  (zz)
+  (define (m1 tt uu)
+    (* (oget (self) "zz")
+       (super) ) ) ) 
+
+(let ((pc4 (new Point3Da -2 100 23))
+      (pc2 (new Point3Db 20 1 5)) )
+  (try-catch-finally
+   (+ (send "m1" pc4 3 4)    ; 417 = 17 + 4*100 + 3*-2
+      (+ (send "m1" pc2 2 3) ; 600 = 5*3*1*2*20
+         -170 ) )
+   (lambda (e) #f)
+   #f ) )
+
+;;; end of u847-6.scm
+
+ -->
+<programme6
+><!-- test:name description='super(arg1 arg2) double avec double hierarchie avec renommage' 
+--><!-- test:result value='847' 
+--><definitionClasse nom='Point' parent='Object'
+><champs
+><champ nom='x'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='tt'
+/><variable nom='uu'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='tt'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='x'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point2Da' parent='Point'
+><champs
+><champ nom='y'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='ttt'
+/><variable nom='uuu'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='uuu'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='y'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point3Da' parent='Point2Da'
+><champs
+><champ nom='z'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='tt'
+/><variable nom='uu'
+/></variables
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><lectureChamp champ='z'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point2Db' parent='Point'
+><champs
+><champ nom='yy'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='t'
+/><variable nom='u'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><operationBinaire operateur='*'
+><operandeGauche
+><variable nom='u'
+/></operandeGauche
+><operandeDroit
+><lectureChamp champ='yy'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeDroit
+></operationBinaire
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><definitionClasse nom='Point3Db' parent='Point2Db'
+><champs
+><champ nom='zz'
+/></champs
+><methodes
+><methode nom='m1'
+><variables
+><variable nom='tt'
+/><variable nom='uu'
+/></variables
+><corps
+><operationBinaire operateur='*'
+><operandeGauche
+><lectureChamp champ='zz'
+><cible
+><moi
+/></cible
+></lectureChamp
+></operandeGauche
+><operandeDroit
+><appelSuper
+/></operandeDroit
+></operationBinaire
+></corps
+></methode
+></methodes
+></definitionClasse
+><blocLocal
+><liaisons
+><liaison
+><variable nom='pc4'
+/><initialisation
+><creationObjet classe='Point3Da'
+><entier valeur='-2'
+/><entier valeur='100'
+/><entier valeur='23'
+/></creationObjet
+></initialisation
+></liaison
+><liaison
+><variable nom='pc2'
+/><initialisation
+><creationObjet classe='Point3Db'
+><entier valeur='20'
+/><entier valeur='1'
+/><entier valeur='5'
+/></creationObjet
+></initialisation
+></liaison
+></liaisons
+><corps
+><try
+><corps
+><operationBinaire operateur='+'
+><operandeGauche
+><envoiMessage message='m1'
+><receveur
+><variable nom='pc4'
+/></receveur
+><arguments
+><entier valeur='3'
+/><entier valeur='4'
+/></arguments
+></envoiMessage
+></operandeGauche
+><operandeDroit
+><operationBinaire operateur='+'
+><operandeGauche
+><envoiMessage message='m1'
+><receveur
+><variable nom='pc2'
+/></receveur
+><arguments
+><entier valeur='2'
+/><entier valeur='3'
+/></arguments
+></envoiMessage
+></operandeGauche
+><operandeDroit
+><entier valeur='-170'
+/></operandeDroit
+></operationBinaire
+></operandeDroit
+></operationBinaire
+></corps
+><catch exception='e'
+><booleen valeur='false'
+/></catch
+></try
+></corps
+></blocLocal
+></programme6
+>
