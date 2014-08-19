@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- 
-  Le programme est:
-
-        23;
--->
-<programme1>
-  <entier valeur="23"/>
-</programme1>
